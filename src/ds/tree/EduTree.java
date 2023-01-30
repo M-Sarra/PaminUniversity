@@ -4,6 +4,10 @@ import ds.list.EduNode;
 
 public class EduTree extends Tree{
 
+    public EduTree() {
+        super();
+    }
+
     private void insert(EduNode node) {
         TreeNode n = BST_insert(this.getRoot(), null, node);
         RB_insert(n);
@@ -52,7 +56,77 @@ public class EduTree extends Tree{
         }
     }
 
+    private EduNode RB_Search(String name) {
+        return this.search(this.getRoot(), name).getEduData();
+    }
+
     private void RB_delete(String name) {
-        TreeNode node = delete(name);
+        TreeNode n = delete(name);
+        if (!this.isFixing()) return;
+        while (!n.equals(this.getRoot()) && n.getColor() == Color.BLACK) {
+            if (n.getParent().getLeft().equals(n))
+                n = fixLeft(n);
+            else n = fixRight(n);
+            n.setColor(Color.BLACK);
+        }
+        this.setFixing(false);
+    }
+
+    private TreeNode fixLeft(TreeNode n) {
+        TreeNode sibling = n.getParent().getRight();
+        if (sibling.getColor() == Color.RED) {
+            sibling.setColor(Color.BLACK);
+            n.getParent().setColor(Color.RED);
+            this.leftRotate(n.getParent());
+            sibling = n.getParent().getRight();
+        }
+        if (sibling.getLeft().getColor() == Color.BLACK &&
+                sibling.getRight().getColor() == Color.BLACK) {
+            sibling.setColor(Color.RED);
+            n = n.getParent();
+        }
+        else {
+            if (sibling.getRight().getColor() == Color.BLACK) {
+                sibling.getLeft().setColor(Color.BLACK);
+                sibling.setColor(Color.RED);
+                this.rightRotate(sibling);
+                sibling = n.getParent().getRight();
+            }
+            sibling.setColor(n.getParent().getColor());
+            n.getParent().setColor(Color.BLACK);
+            sibling.getRight().setColor(Color.BLACK);
+            this.leftRotate(n.getParent());
+            n = this.getRoot();
+        }
+        return n;
+    }
+
+    private TreeNode fixRight(TreeNode n) {
+        TreeNode sibling = n.getParent().getLeft();
+        if (sibling.getColor() == Color.RED) {
+            sibling.setColor(Color.BLACK);
+            n.getParent().setColor(Color.RED);
+            this.rightRotate(n.getParent());
+            sibling = n.getParent().getLeft();
+        }
+        if (sibling.getLeft().getColor() == Color.BLACK &&
+                sibling.getRight().getColor() == Color.BLACK) {
+            sibling.setColor(Color.RED);
+            n = n.getParent();
+        }
+        else {
+            if (sibling.getLeft().getColor() == Color.BLACK) {
+                sibling.getRight().setColor(Color.BLACK);
+                sibling.setColor(Color.RED);
+                this.leftRotate(sibling);
+                sibling = n.getParent().getLeft();
+            }
+            sibling.setColor(n.getParent().getColor());
+            n.getParent().setColor(Color.BLACK);
+            sibling.getLeft().setColor(Color.BLACK);
+            this.rightRotate(n.getParent());
+            n = this.getRoot();
+        }
+        return n;
     }
 }

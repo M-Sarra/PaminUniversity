@@ -5,8 +5,11 @@ import models.EduObject;
 
 public class Tree {
     private TreeNode root;
+    private boolean fixing;
 
-    public Tree() {}
+    public Tree() {
+        fixing = false;
+    }
 
     public TreeNode getRoot() {
         return root;
@@ -14,6 +17,14 @@ public class Tree {
 
     public void setRoot(TreeNode root) {
         this.root = root;
+    }
+
+    public boolean isFixing() {
+        return fixing;
+    }
+
+    public void setFixing(boolean fixing) {
+        this.fixing = fixing;
     }
 
     protected void leftRotate(TreeNode n) {
@@ -117,6 +128,8 @@ public class Tree {
             n.setName(deletedNode.getName());
             n.setEduData(deletedNode.getEduData());
         }
+        if (deletedNode.getColor() == Color.BLACK)
+            fixing = true;
         return node;
     }
 }
