@@ -63,6 +63,14 @@ public class GradeList{
             n.getRightPre().setRightNext(n.getRightNext());
         if (n.getRightNext() != null)
             n.getRightNext().setRightPre(n.getRightPre());
+        if (isEmpty()) {
+            this.first = null;
+            this.last = null;
+        }
+        else if (this.first.equals(n))
+            this.first = n.getNext();
+        else if (this.last.equals(n))
+            this.last = n.getPrevious();
         this.size--;
     }
 }

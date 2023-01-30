@@ -8,7 +8,7 @@ public class EduTree extends Tree{
         super();
     }
 
-    private void insert(EduNode node) {
+    public void insert(EduNode node) {
         TreeNode n = BST_insert(this.getRoot(), null, node);
         RB_insert(n);
     }
@@ -56,11 +56,11 @@ public class EduTree extends Tree{
         }
     }
 
-    private EduNode RB_Search(String name) {
+    public EduNode RB_Search(String name) {
         return this.search(this.getRoot(), name).getEduData();
     }
 
-    private void RB_delete(String name) {
+    public void RB_delete(String name) {
         TreeNode n = delete(name);
         if (!this.isFixing()) return;
         while (!n.equals(this.getRoot()) && n.getColor() == Color.BLACK) {
