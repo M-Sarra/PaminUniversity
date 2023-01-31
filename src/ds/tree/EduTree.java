@@ -52,8 +52,8 @@ public class EduTree extends Tree{
                     leftRotate(n.getParent().getParent());
                 }
             }
-            this.getRoot().setColor(Color.BLACK);
         }
+        this.getRoot().setColor(Color.BLACK);
     }
 
     public EduNode RB_Search(String name) {

@@ -71,9 +71,10 @@ public class EduList {
         if (isEmpty())
             throw new Error("list is empty!");
         EduNode n = this.first;
-        this.first = (EduNode) n.getNext();
-        this.first.setPrevious(null);
+        this.first = n.getNext();
         this.size--;
+        if (!isEmpty())
+            this.first.setPrevious(null);
         if (isEmpty()) this.last = null;
     }
 
@@ -81,9 +82,10 @@ public class EduList {
         if (isEmpty())
             throw new Error("list is empty!");
         EduNode n = this.last;
-        this.last = (EduNode) n.getPrevious();
-        this.last.setNext(null);
         this.size--;
+        this.last = n.getPrevious();
+        if (!isEmpty())
+            this.last.setNext(null);
         if (isEmpty()) this.first = null;
     }
 

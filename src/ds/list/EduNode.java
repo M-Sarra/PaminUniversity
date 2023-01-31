@@ -9,6 +9,8 @@ public class EduNode {
     private EduNode leftNext;
     private EduNode rightPre;
     private EduNode rightNext;
+    private EduNode leftHead;
+    private EduNode rightHead;
 
     public EduNode() {
     }
@@ -91,5 +93,21 @@ public class EduNode {
 
     public void setRightNext(EduNode rightNext) {
         this.rightNext = rightNext;
+    }
+
+    public EduNode getLeftHead() {
+        return leftHead;
+    }
+
+    public void setLeftHead(EduNode leftHead) {
+        this.leftHead = leftHead;
+    }
+
+    public EduNode getRightHead() {
+        return rightHead;
+    }
+
+    public void setRightHead(EduNode rightHead) {
+        this.rightHead = rightHead;
     }
 }

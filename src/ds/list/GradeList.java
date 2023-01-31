@@ -1,5 +1,8 @@
 package ds.list;
 
+import models.Course;
+import models.Student;
+
 public class GradeList{
     private int size;
     private EduNode first;
@@ -42,6 +45,9 @@ public class GradeList{
             n.getLeftNext().setLeftPre(n);
         if (n.getRightNext() != null)
             n.getRightNext().setRightPre(n);
+        n.setLeftHead(student);
+        n.setRightHead(course);
+        this.last = n;
         if (isEmpty()) this.first = this.last;
         else this.last.getPrevious().setNext(this.last);
         this.size++;
@@ -72,5 +78,7 @@ public class GradeList{
         else if (this.last.equals(n))
             this.last = n.getPrevious();
         this.size--;
+        ((Student) n.getLeftNext().getElement()).decreaseCourseNum();
+        ((Course) n.getRightHead().getElement()).decreaseStudentNum();
     }
 }
