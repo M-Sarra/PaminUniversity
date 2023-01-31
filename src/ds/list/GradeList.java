@@ -47,6 +47,7 @@ public class GradeList{
             n.getRightNext().setRightPre(n);
         n.setLeftHead(student);
         n.setRightHead(course);
+
         this.last = n;
         if (isEmpty()) this.first = this.last;
         else this.last.getPrevious().setNext(this.last);
@@ -78,7 +79,7 @@ public class GradeList{
         else if (this.last.equals(n))
             this.last = n.getPrevious();
         this.size--;
-        ((Student) n.getLeftNext().getElement()).decreaseCourseNum();
+        ((Student) n.getLeftHead().getElement()).decreaseCourseNum();
         ((Course) n.getRightHead().getElement()).decreaseStudentNum();
     }
 }

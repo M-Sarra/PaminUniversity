@@ -128,7 +128,7 @@ public class Tree {
             n.setName(deletedNode.getName());
             n.setEduData(deletedNode.getEduData());
         }
-        if (deletedNode.getColor() == Color.BLACK)
+        if (deletedNode.getColor() == Color.BLACK && node != null)
             fixing = true;
         return node;
     }

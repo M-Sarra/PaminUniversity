@@ -121,7 +121,8 @@ public class DataHandler {
             treeHandler.deleteStudent(((Student) student.getElement()).getName());
             tableHandler.deleteStudent(((Student) student.getElement()).getStudentCode());
             EduNode grade = student.getGrade();
-            for (int i = 0; i < ((Student) student.getElement()).getCourseNum(); i++) {
+            int size = ((Student) student.getElement()).getCourseNum();
+            for (int i = 0; i < size; i++) {
                 grades.delete(grade);
                 grade = grade.getLeftNext();
             }
@@ -135,7 +136,8 @@ public class DataHandler {
             treeHandler.deleteCourse(((Course) course.getElement()).getName());
             tableHandler.deleteCourse(((Course) course.getElement()).getCourseCode());
             EduNode grade = course.getGrade();
-            for (int i = 0; i < ((Course) grade.getElement()).getStudentNum(); i++) {
+            int size = ((Course) course.getElement()).getStudentNum();
+            for (int i = 0; i < size; i++) {
                 grades.delete(grade);
                 grade = grade.getRightNext();
             }
