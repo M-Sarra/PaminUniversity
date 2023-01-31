@@ -93,7 +93,18 @@ public class DynamicTable {
         }
     }
 
-    private int hash(int x, int n) {
+    public EduNode search(int code) {
+        int hash = hash(code, table.length);
+        HashNode node = table[hash].getHashList().getFirst();
+        for (int i = 0; i < table[hash].getHashList().getSize(); i++) {
+            if (node.getCode() == code)
+                return node.getEduData();
+            node = node.getNext();
+        }
+        return null;
+    }
+
+    public int hash(int x, int n) {
         return ((a * n + b) % p) % x;
     }
 }

@@ -13,7 +13,7 @@ public class Main {
         int a = scanner.nextInt();
         int b = scanner.nextInt();
         int p = scanner.nextInt();
-        RequestHandler handler = new RequestHandler();
+        RequestHandler handler = new RequestHandler(a, b, p);
         for (int i = 0; i < T; i++) {
             String requestText = scanner.nextLine();
             Request request = new Request(RequestType.valueOf

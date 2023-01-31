@@ -11,21 +11,29 @@ public class DataHandler {
     private final EduList students;
     private final EduList courses;
     private final GradeList grades;
+    private final TreeHandler treeHandler;
+    private final TableHandler tableHandler;
 
-    public DataHandler() {
+    public DataHandler(TreeHandler treeHandler, TableHandler tableHandler) {
         students = new EduList();
         courses = new EduList();
         grades = new GradeList();
+        this.treeHandler = treeHandler;
+        this.tableHandler = tableHandler;
     }
 
     public void addStudent(int studentCode, String studentName) {
         Student student = new Student(studentCode, studentName);
-        this.students.insert(student);
+        EduNode node = this.students.insert(student);
+        treeHandler.insertStudent(node);
+        tableHandler.insertStudent(node, studentCode);
     }
 
     public void addCourse(int courseCode, String courseName) {
         Course course = new Course(courseCode, courseName);
-        this.courses.insert(course);
+        EduNode node = this.courses.insert(course);
+        treeHandler.insertCourse(node);
+        tableHandler.insertCourse(node, courseCode);
     }
 
     public void addGrade(int studentCode, int courseCode,
@@ -70,7 +78,9 @@ public class DataHandler {
         EduNode n = students.getFirst();
         for (int i = 0; i < students.getSize(); i++) {
             if (((Student) n.getElement()).getStudentCode() == studentCode) {
+                String prevName = ((Student) n.getElement()).getName();
                 ((Student) n.getElement()).setName(studentName);
+                treeHandler.editStudent(n, prevName);
             }
             else n = n.getNext();
         }
@@ -80,7 +90,9 @@ public class DataHandler {
         EduNode n = courses.getFirst();
         for (int i = 0; i < courses.getSize(); i++) {
             if (((Course) n.getElement()).getCourseCode() == courseCode) {
+                String prevName = ((Course) n.getElement()).getName();
                 ((Course) n.getElement()).setName(courseName);
+                treeHandler.editCourse(n, prevName);
             }
             else n = n.getNext();
         }
@@ -106,6 +118,8 @@ public class DataHandler {
         EduNode student = findStudent(studentCode);
         students.delete(student);
         if (student != null) {
+            treeHandler.deleteStudent(((Student) student.getElement()).getName());
+            tableHandler.deleteStudent(((Student) student.getElement()).getStudentCode());
             EduNode grade = student.getGrade();
             for (int i = 0; i < ((Student) student.getElement()).getCourseNum(); i++) {
                 grades.delete(grade);
@@ -118,6 +132,8 @@ public class DataHandler {
         EduNode course = findCourse(courseCode);
         courses.delete(course);
         if (course != null) {
+            treeHandler.deleteCourse(((Course) course.getElement()).getName());
+            tableHandler.deleteCourse(((Course) course.getElement()).getCourseCode());
             EduNode grade = course.getGrade();
             for (int i = 0; i < ((Course) grade.getElement()).getStudentNum(); i++) {
                 grades.delete(grade);

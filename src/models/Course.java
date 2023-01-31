@@ -2,7 +2,6 @@ package models;
 
 public class Course extends EduObject{
     private int courseCode;
-    private String name;
     private int studentNum;
 
     public Course(int courseCode, String name) {
