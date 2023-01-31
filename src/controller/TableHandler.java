@@ -47,7 +47,7 @@ public class TableHandler {
                     "\n" + coursesData;
             gradeNode = gradeNode.getLeftNext();
         }
-        return hash + "\n" + studentData + "\n" + coursesData;
+        return "[" + hash + "]" + "\n" + studentData + "\n" + coursesData;
     }
 
     public String findCourseData(int code) {
