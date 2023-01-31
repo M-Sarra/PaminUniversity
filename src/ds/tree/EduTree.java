@@ -57,7 +57,9 @@ public class EduTree extends Tree{
     }
 
     public EduNode RB_Search(String name) {
-        return this.search(this.getRoot(), name).getEduData();
+        TreeNode node = this.search(this.getRoot(), name);
+        if (node != null) return node.getEduData();
+        else return null;
     }
 
     public void RB_delete(String name) {

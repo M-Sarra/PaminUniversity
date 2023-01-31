@@ -32,8 +32,9 @@ public class TableHandler {
     }
 
     public String findStudentData(int code) {
-        int hash = students.hash(students.getSize(), code);
+        int hash = students.hash(code, students.getSize());
         EduNode node = students.search(code);
+        if (node == null) return null;
         Student student = (Student) node.getElement();
         String studentData = "[" + student.getStudentCode() + "] [" +
                 student.getName() + "] [" + student.getCourseNum() + "]";
@@ -50,8 +51,9 @@ public class TableHandler {
     }
 
     public String findCourseData(int code) {
-        int hash = courses.hash(courses.getSize(), code);
+        int hash = courses.hash(code, courses.getSize());
         EduNode node = courses.search(code);
+        if (node == null) return null;
         Course course = (Course) node.getElement();
         String courseData = "[" + course.getCourseCode() + "] [" +
                 course.getName() + "] [" + course.getStudentNum() + "]";
@@ -64,7 +66,7 @@ public class TableHandler {
                     "\n" + studentsData;
             gradeNode = gradeNode.getRightNext();
         }
-        return hash + "\n" + courseData + "\n" + studentsData;
+        return "[" + hash + "]" + "\n" + courseData + "\n" + studentsData;
     }
 
 }

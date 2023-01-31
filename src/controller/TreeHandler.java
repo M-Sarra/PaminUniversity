@@ -43,6 +43,7 @@ public class TreeHandler {
 
     public String findStudentData(String name) {
         EduNode node = students.RB_Search(name);
+        if (node == null) return null;
         Student student = (Student) node.getElement();
         String studentData = "[" + student.getStudentCode() + "] [" +
                 student.getName() + "] [" + student.getCourseNum() + "]";
@@ -60,6 +61,7 @@ public class TreeHandler {
 
     public String findCourseData(String name) {
         EduNode node = courses.RB_Search(name);
+        if (node == null) return null;
         Course course = (Course) node.getElement();
         String courseData = "[" + course.getCourseCode() + "] [" +
                 course.getName() + "] [" + course.getStudentNum() + "]";

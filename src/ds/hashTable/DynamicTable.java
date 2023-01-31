@@ -104,7 +104,7 @@ public class DynamicTable {
         return null;
     }
 
-    public int hash(int x, int n) {
+    public int hash(int n, int x) {
         return ((a * n + b) % p) % x;
     }
 }

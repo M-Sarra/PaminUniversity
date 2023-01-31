@@ -9,10 +9,10 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int T = scanner.nextInt();
-        int a = scanner.nextInt();
-        int b = scanner.nextInt();
-        int p = scanner.nextInt();
+        int T = Integer.parseInt(scanner.nextLine());
+        int a = Integer.parseInt(scanner.nextLine());
+        int b = Integer.parseInt(scanner.nextLine());
+        int p = Integer.parseInt(scanner.nextLine());
         RequestHandler handler = new RequestHandler(a, b, p);
         for (int i = 0; i < T; i++) {
             String requestText = scanner.nextLine();
