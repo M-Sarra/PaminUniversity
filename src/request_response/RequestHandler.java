@@ -10,9 +10,10 @@ public class RequestHandler {
     private final TableHandler tableHandler;
 
     public RequestHandler(int a, int b, int p) {
+        boolean isCreating = p != 1;
         this.treeHandler = new TreeHandler();
         this.tableHandler = new TableHandler(a, b , p);
-        this.dataHandler = new DataHandler(treeHandler, tableHandler);
+        this.dataHandler = new DataHandler(treeHandler, tableHandler, isCreating);
     }
 
     public Response HandleRequest(Request request) {
