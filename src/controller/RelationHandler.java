@@ -11,23 +11,14 @@ import models.Grade;
 public class RelationHandler {
     private final Graph courses;
     private final EduList coursesList;
-    private boolean isCreated;
 
     public RelationHandler(EduList courses) {
         this.courses = new Graph(courses != null ? courses.getSize() : 0);
         this.coursesList = courses;
-        this.isCreated = false;
+        createGraph();
     }
 
-    public boolean isCreated() {
-        return isCreated;
-    }
-
-    public void setCreated(boolean created) {
-        isCreated = created;
-    }
-
-    public void createGraph() {
+    private void createGraph() {
         EduNode course = coursesList.getFirst();
         for (int i = 0; i < coursesList.getSize(); i++) {
             Vertex  v = new Vertex(((Course) course.getElement()).getCourseCode(), course);
@@ -35,13 +26,11 @@ public class RelationHandler {
         }
         for (int i = 0; i < courses.getSize(); i++) {
             Vertex v = courses.getVertices()[i];
-            for (int j = 0; j < courses.getSize(); j++) {
+            for (int j = i + 1; j < courses.getSize(); j++) {
                 Vertex u = courses.getVertices()[j];
-                if (!v.equals(u)) {
-                    if (isDirectlyRelative(v.getData(), u.getData())) {
-                        v.addAdjacent(u);
-                        u.addAdjacent(v);
-                    }
+                if (isDirectlyRelative(v.getData(), u.getData())) {
+                    v.addAdjacent(u);
+                    u.addAdjacent(v);
                 }
             }
         }
